@@ -1,0 +1,17 @@
+<header class="unselectable">
+    <div class="left">
+        <h2>Bast</h2>
+    </div>
+    <div class="middle">
+        <%- include('./search-bar.ejs') %>
+    </div>
+    <div class="right">
+        <% if (locals.auth) { %>
+            <a href="/logout">Logout</a>
+            <a href="/profile"><%= locals.auth.name %></a>
+        <% } else { %>
+            <a href="/signup">Sign up</a>
+            <a href="/login">Login</a>
+        <% } %>
+    </div>
+</header>

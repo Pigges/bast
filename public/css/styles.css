@@ -1,0 +1,114 @@
+:root {
+    --primary: #000;
+    --secondary: #fff;
+    --background: #539ff5;
+}
+
+* {
+    margin: 0;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+html {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: var(--primary);
+    background-color: var(--background);
+}
+
+/* HEADER */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+header #search-bar {
+    display: flex;
+    align-items: center;
+    width: 50vw;
+    max-width: 600px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid #000;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+header #search-bar #query {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+header #search-bar #query:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+header #search-bar button {
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+header #search-bar button:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+header #search-bar button:active {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+header #search-bar button svg {
+    height: 30px;
+    margin: 10px;
+}
+
+/* HERO */
+
+.hero {
+    color: var(--secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    text-align: center;
+    min-height: 500px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.hero .title {
+    font-size: 3rem;
+}
+
+.hero .summary {
+    max-width: 500px;
+}
+
+.hero .try {
+    font-weight: bold;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 15px 40px;
+    border-radius: 10px;
+    background-color: var(--secondary);
+}
+
+.hero .try:hover {
+    background-color: rgba(255, 255, 255, 0.75);
+}
