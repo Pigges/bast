@@ -1,23 +1,22 @@
 import * as dotenv from 'dotenv';
 import express from 'express';
+import mongoose from 'mongoose';
+import pages from './pages.js';
 import api from './api.js';
 
 dotenv.config();
 const app = express();
 
+mongoose.connect(process.env.MONGODBADDRESS);
+
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-api(app);
+app.use('/api', api)
 
-app.get('/', (req,res)=>{
-    res.render('template', {title: "Home", view: "index"})
-});
+// api(app);
+pages(app);
 
-app.get('/search', (req,res)=>{
-    res.render('template', {title: "Home", view: "search"})
-});
-
-app.listen(3000, (err)=>{
+app.listen(process.env.PORT || 3000, (err)=>{
     console.log(err||"Server running");
 })
