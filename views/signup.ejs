@@ -34,6 +34,7 @@
             </svg>                
             <input type="password" name="password-again" id="password-again" placeholder="Password again">
         </div>
+        <div id="message"></div>
         <button id="submit">Sign up</button>
     </div>
 </form>
@@ -49,31 +50,38 @@
 
     submit.addEventListener('click', (e)=>{
         e.preventDefault();
-
-        const invalid = validate();
-        if (invalid.length) {
-            // Set a red border around invalid fields
-            for (let i in invalid) {
-                fields[invalid[i]].style.outline = '1px solid #ff0000';
-                // setTimeout(()=>{
-                //     fields[invalid[i]].style.outline = 'none';
-                // }, 10000)
-            }
-        } else signup(); // Sign up
+        signup(); // Sign up
     })
 
     async function signup() {
-        let resp = await fetch('/api/signup');
-        resp = await resp.json();
+        // Create account
+        let resp = await axios({
+            url: '/api/signup',
+            method: 'post',
+            data: {
+                email: fields.email.value,
+                username: fields.username.value,
+                password: fields.password.value,
+                password_again: fields.password_again.value
+            }
+        });
+        resp = await resp.data;
+        
+        // Failed?
+        if (resp.error) return document.querySelector('#message').appendChild(addMessage(resp.error));
+
+        // Success?
+        if (resp.message === "success") {
+            window.location = '/';
+        }
     }
 
-    // Check validity on input fields
-    function validate() {
-        let invalid = [];
-        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(fields.email.value)) invalid.push('email'); // Source: https://www.w3resource.com/javascript/form/email-validation.php
-        if (!fields.username.value) invalid.push('username');
-        if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/.test(fields.password.value)) invalid.push('password'); // Source: https://w3resource.com/javascript/form/password-validation.php
-        if (fields.password_again.value !== fields.password.value) invalid.push('password_again');
-        return invalid; // A list of invalid fields
+    function addMessage(msg) {
+        const message = document.createElement('p');
+        message.innerText = msg;
+        setTimeout(()=>{
+            message.remove();
+        }, 1000*10)
+        return message;
     }
 </script>

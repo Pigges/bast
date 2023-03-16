@@ -1,0 +1,69 @@
+<h1 class="signup-title">Ready to log in?</h1>
+<form id="signup">
+    <div class="left unselectable">
+        <h2>Not a Member?</h2>
+        <a href="/login">Signup Now</a>
+    </div>
+    <div class="right">
+        <h2>Login</h2>
+        <div class="email input">
+            <svg viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <title>Email</title>
+                <path d="M19.0556 13.5C19.0556 16.5682 16.5682 19.0556 13.5 19.0556C10.4317 19.0556 7.94444 16.5682 7.94444 13.5C7.94444 10.4317 10.4317 7.94444 13.5 7.94444C16.5682 7.94444 19.0556 10.4317 19.0556 13.5ZM19.0556 13.5V15.5833C19.0556 17.501 20.6101 19.0556 22.5278 19.0556C24.4454 19.0556 26 17.501 26 15.5833V13.5C26 6.59644 20.4036 1 13.5 1C6.59644 1 1 6.59644 1 13.5C1 20.4036 6.59644 26 13.5 26H19.0556" stroke="#539FF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>           
+            <input type="text" name="email" id="email" placeholder="Email">
+        </div>
+        <div class="password input">
+            <svg viewBox="0 0 27 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <title>Password</title>
+                <path d="M15.5834 1L13.5 4.75003M13.5 4.75003L11.4166 1M13.5 4.75003H10.375M13.5 4.75003H16.625M13.5 4.75003L11.4166 8.50003M13.5 4.75003L15.5834 8.50003M6.20834 1.00008L4.125 4.75003M4.125 4.75003L2.04166 1.00008M4.125 4.75003H1M4.125 4.75003H7.25M4.125 4.75003L2.04166 8.50003M4.125 4.75003L6.20834 8.50003M24.9584 1.00008L22.875 4.75003M22.875 4.75003L20.7916 1.00008M22.875 4.75003H19.75M22.875 4.75003H26M22.875 4.75003L20.7916 8.50003M22.875 4.75003L24.9584 8.50003" stroke="#539FF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>                
+            <input type="password" name="password" id="password" placeholder="Password">
+        </div>
+        <div id="message"></div>
+        <button id="submit">Sign up</button>
+    </div>
+</form>
+<script>
+    // Handle login event
+    const fields = {
+        email: document.querySelector('#email'),
+        password: document.querySelector('#password'),
+        submit: document.querySelector('#submit')
+    }
+
+    submit.addEventListener('click', (e)=>{
+        e.preventDefault();
+        login(); // Sign up
+    })
+
+    async function login() {
+        // Login to account
+        let resp = await axios({
+            url: '/api/login',
+            method: 'post',
+            data: {
+                email: fields.email.value,
+                password: fields.password.value
+            }
+        });
+        resp = await resp.data;
+        
+        // Failed?
+        if (resp.error) return document.querySelector('#message').appendChild(addMessage(resp.error));
+
+        // Success?
+        if (resp.message === "success") {
+            window.location = '/';
+        }
+    }
+
+    function addMessage(msg) {
+        const message = document.createElement('p');
+        message.innerText = msg;
+        setTimeout(()=>{
+            message.remove();
+        }, 1000*10)
+        return message;
+    }
+</script>

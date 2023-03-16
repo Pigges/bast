@@ -8,7 +8,7 @@
     <div class="right">
         <% if (locals.auth) { %>
             <a href="/logout">Logout</a>
-            <a href="/profile"><%= locals.auth.name %></a>
+            <a href="/profile"><img src="<%= locals.auth.avatar %>" alt=""></a>
         <% } else { %>
             <a href="/signup">Sign up</a>
             <a href="/login">Login</a>

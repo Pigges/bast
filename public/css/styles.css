@@ -91,8 +91,16 @@ header .right {
 }
 
 header .right a {
+    display: flex;
+    align-items: center;
     color: var(--primary);
     text-decoration: none;
+}
+
+header .right a img {
+    height: 40px;
+    max-height: 80%;
+    border-radius: 100px;
 }
 
 /* HERO */
@@ -295,4 +303,13 @@ header .right a {
     border-radius: 10px;
     border: none;
     cursor: pointer;
+}
+
+#signup #message:not(:empty) {
+    width: fit-content;
+    margin: auto;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid #ff0000;
+    background-color: rgba(255, 0, 0, 0.1);
 }

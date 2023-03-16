@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
     <title><%= title ? `${title} | Bast` : 'Bast' %></title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 </head>
 <body>
     <%- include('./components/header.ejs') %>
     <%- include(view) %>
+    <%= JSON.stringify(auth) %>
 </body>
 </html>

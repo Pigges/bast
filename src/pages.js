@@ -1,5 +1,3 @@
-import mongoose from "mongoose";
-
 const pages = {
     "": {
         "title": "Home",
@@ -13,18 +11,21 @@ const pages = {
     },
     "signup": {
         "title": "Sign up"
+    },
+    "login": {
+        "title": "Login"
     }
 }
 
 export default (app)=>{
     for (let page in pages) {
-        app.get('/' + page, (req,res)=>{
-            res.render('template', {title: pages[page].title || "", view: pages[page].view || page})
+        app.get('/' + page, async (req,res)=>{
+            res.render('template', {title: pages[page].title || "", view: pages[page].view || page, auth: req.auth})
         });
     }
 
     // Page Not Found
     app.get('*', (req,res)=>{
-        res.render('template', {title: "404", view: "404"})
+        res.render('template', {title: "404", view: "404", auth: req.auth})
     });
 }
