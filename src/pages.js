@@ -14,6 +14,9 @@ const pages = {
     },
     "login": {
         "title": "Login"
+    },
+    "profile": {
+        "title": "Profile"
     }
 }
 

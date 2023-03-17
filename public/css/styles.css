@@ -313,3 +313,104 @@ header .right a img {
     border: 1px solid #ff0000;
     background-color: rgba(255, 0, 0, 0.1);
 }
+
+
+/* PROFILE */
+
+#profile {
+    display: flex;
+    flex-direction: column;
+    max-width: 1000px;
+    margin: auto;
+    background-color: var(--secondary);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+#profile .banner {
+    color: var(--secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 250px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#profile .banner .left {
+    display: flex;
+    margin-left: 25px;
+    gap: 20px;
+}
+
+#profile .banner .left .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+#profile .banner .left .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#profile .banner .left .text .username {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#profile .banner .right a {
+    color: var(--primary);
+    text-decoration: none;
+    background-color: var(--secondary);
+    padding: 10px 20px;
+    margin-right: 25px;
+    border-radius: 10px;
+}
+
+#profile #update {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 500px;
+    max-width: 50%;
+    margin: 40px auto;
+}
+
+#profile #update .input {
+    display: flex;
+    gap: 5px;
+    width: 80%;
+    margin: auto;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+#profile #update .input svg {
+    width: 25px;
+}
+
+#profile #update .input input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+}
+
+#profile #update .input input:focus {
+    outline: none;
+}
+
+
+#profile #update button {
+    margin: auto;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: none;
+    border-radius: 10px;
+}

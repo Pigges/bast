@@ -14,7 +14,7 @@ export default async (req,res)=>{
     if (!user) return res.json({error: "email does not exist"});
 
     // Check if password is correct
-    if (!bcrypt.compare(req.body.password, user.password)) return res.json({error: "invalid password"});
+    if (!await bcrypt.compare(req.body.password, user.password)) return res.json({error: "invalid password"});
 
 
     await Users.findByIdAndUpdate(user._id, {
