@@ -16,14 +16,24 @@ const pages = {
         "title": "Login"
     },
     "profile": {
-        "title": "Profile"
+        "title": "Profile",
+        "auth": true
+    },
+    "article/create": {
+        "title": "Creating new article...",
+        "auth": true
+    },
+    "article/:id/edit": {
+        "title": "Article",
+        "view": "article/edit"
     }
 }
 
 export default (app)=>{
     for (let page in pages) {
         app.get('/' + page, async (req,res)=>{
-            res.render('template', {title: pages[page].title || "", view: pages[page].view || page, auth: req.auth})
+            if (pages[page].auth && !req.auth) return res.redirect('/login');
+            res.render('template', {title: pages[page].title || "", view: pages[page].view || page, auth: req.auth, params: req.params})
         });
     }
 

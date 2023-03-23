@@ -305,7 +305,7 @@ header .right a img {
     cursor: pointer;
 }
 
-#signup #message:not(:empty) {
+#message:not(:empty) {
     width: fit-content;
     margin: auto;
     padding: 10px 20px;
@@ -335,7 +335,7 @@ header .right a img {
     align-items: center;
     height: 250px;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 #profile .banner .left {
@@ -408,6 +408,123 @@ header .right a img {
 
 
 #profile #update button {
+    margin: auto;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: none;
+    border-radius: 10px;
+}
+
+
+/* BROWSE */
+
+#browse {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 25px;
+}
+
+#browse .rec {
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--secondary);
+}
+
+#browse .rec .title {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#browse .right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+/* ARTICLE EDIT */
+
+#article {
+    display: flex;
+    flex-direction: column;
+    max-width: 1000px;
+    margin: auto;
+    background-color: var(--secondary);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+#article .banner {
+    color: var(--secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 250px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#article .banner #title {
+    color: var(--secondary);
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 25px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#article .banner #title:focus {
+    outline: none;
+}
+
+#article .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 500px;
+    max-width: 50%;
+    margin: 40px auto;
+}
+
+#article .form label {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#article .form textarea {
+    max-width: 500px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#article .form textarea:focus {
+    outline: none;
+}
+
+#article #update .input svg {
+    width: 25px;
+}
+
+#article #update .input input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+}
+
+#article #update .input input:focus {
+    outline: none;
+}
+
+
+#artice #update button {
     margin: auto;
     padding: 10px 20px;
     background-color: rgba(0, 0, 0, 0.2);

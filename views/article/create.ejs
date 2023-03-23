@@ -1,0 +1,30 @@
+<h1>Creating new article...</h1>
+<div id="message"></div>
+<script>
+    newArticle()
+    async function newArticle() {
+        // Create a new article and redirect to it
+        let resp = await axios({
+            url: '/api/article/create',
+            method: 'post'
+        });
+        resp = await resp.data;
+        
+        // Failed?
+        if (resp.error) return document.querySelector('#message').appendChild(addMessage(resp.error));
+
+        // Success?
+        if (resp.id) {
+            window.location = `/article/${resp.id}/edit`;
+        }
+    }
+
+    function addMessage(msg) {
+        const message = document.createElement('p');
+        message.innerText = msg;
+        setTimeout(()=>{
+            message.remove();
+        }, 1000*10)
+        return message;
+    }
+</script>

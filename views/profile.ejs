@@ -12,6 +12,7 @@
         </div>
     </div>
     <form id="update">
+        <h2>Update profile information</h2>
         <div class="email input">
             <svg viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <title>Email</title>
@@ -33,7 +34,61 @@
             </svg>                
             <input type="password" name="password" id="password" placeholder="Password">
         </div>
+        <div class="password input">
+            <svg viewBox="0 0 27 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <title>Password again</title>
+                <path d="M15.5834 1L13.5 4.75003M13.5 4.75003L11.4166 1M13.5 4.75003H10.375M13.5 4.75003H16.625M13.5 4.75003L11.4166 8.50003M13.5 4.75003L15.5834 8.50003M6.20834 1.00008L4.125 4.75003M4.125 4.75003L2.04166 1.00008M4.125 4.75003H1M4.125 4.75003H7.25M4.125 4.75003L2.04166 8.50003M4.125 4.75003L6.20834 8.50003M24.9584 1.00008L22.875 4.75003M22.875 4.75003L20.7916 1.00008M22.875 4.75003H19.75M22.875 4.75003H26M22.875 4.75003L20.7916 8.50003M22.875 4.75003L24.9584 8.50003" stroke="#539FF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>                
+            <input type="password" name="password-again" id="password-again" placeholder="Password again">
+        </div>
         <div id="message"></div>
         <button id="submit">Update</button>
     </form>
 </div>
+<script>
+    // Handle login event
+    const fields = {
+        email: document.querySelector('#email'),
+        username: document.querySelector('#username'),
+        password: document.querySelector('#password'),
+        password_again: document.querySelector('#password-again'),
+        submit: document.querySelector('#submit')
+    }
+
+    submit.addEventListener('click', (e)=>{
+        e.preventDefault();
+        update(); // Update information
+    })
+
+    async function update() {
+        // Update account
+        let resp = await axios({
+            url: '/api/profile/update',
+            method: 'post',
+            data: {
+                email: fields.email.value,
+                username: fields.username.value,
+                password: fields.password.value,
+                password_again: fields.password_again.value
+            }
+        });
+        resp = await resp.data;
+        
+        // Failed?
+        if (resp.error) return document.querySelector('#message').appendChild(addMessage(resp.error));
+
+        // Success?
+        if (resp.message === "success") {
+            window.location.reload();
+        }
+    }
+
+    function addMessage(msg) {
+        const message = document.createElement('p');
+        message.innerText = msg;
+        setTimeout(()=>{
+            message.remove();
+        }, 1000*10)
+        return message;
+    }
+</script>
