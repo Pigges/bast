@@ -1,0 +1,11 @@
+<script>
+    logout();
+    async function logout() {
+        await axios({
+            url: '/api/logout',
+            method: 'post'
+        });
+
+        window.location = '/';
+    }
+</script>

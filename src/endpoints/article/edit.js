@@ -16,7 +16,9 @@ export default async (req,res)=>{
     if (!article) return res.json({error: "article does not exist"});
     if (user._id.toString() !== article.author) return res.json({error: "not allowed to edit this article"});
 
-    await Users.findByIdAndUpdate(article._id, {
+    console.log(article);
+
+    await Articles.findByIdAndUpdate(article._id, {
         title: req.body.title || undefined,
         intro: req.body.intro || undefined,
         content: req.body.content || undefined 

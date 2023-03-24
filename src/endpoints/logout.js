@@ -4,8 +4,12 @@ import user from '../schemas/User.js';
 const Users = mongoose.model('Users', user)
 
 export default async (req,res)=>{
-    const user = await Users.findByIdAndUpdate(req.auth._id, {
-        sessionExpire: Date.now()
-    });
-    res.json({message: "success"});
+    try {
+        const user = await Users.findOneAndUpdate({sessionID: req.session.id}, {
+            sessionExpire: 0
+        });
+        res.json({message: "success"});
+    } catch {
+        res.json({error: "could not logout"});
+    }
 }

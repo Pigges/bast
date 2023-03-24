@@ -21,12 +21,10 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 
 async function authentication(req,res,next) {
-    const users = await Users.find({});
-    for (let i in users) {
-        if (users[i].sessionID === req.session.id) {
-            req.auth = users[i];
-            return next();
-        }
+    const user = await Users.findOne({sessionID: req.session.id});
+    if (user && user.sessionExpire > Date.now()) {
+        req.auth = user;
+        return next();
     }
     
     req.auth = false;

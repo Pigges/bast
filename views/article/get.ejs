@@ -1,0 +1,77 @@
+<div id="article">
+    <div class="banner">
+        <h2 id="title"></h2>
+    </div>
+    <div class="view">
+        <a href="#" id="editlink" class="hide">Edit</a>
+        <p id="intro"></p>
+        <a href="#" id="author">
+            <div class="avatar"><img id="avatar" src="#" alt=""></div>
+            <div class="text">
+                <p id="username"></p>
+                <p id="userinfo"></p>
+            </div>
+        </a>
+        <p id="content"></p>
+    </div>
+</div>
+<script>
+    getArticle();
+    async function getArticle() {
+        // Load an article
+        let resp = await axios({
+            url: '/api/article/get',
+            method: 'post',
+            data: {
+                id: "<%= locals.params.id %>"
+            }
+        });
+        resp = await resp.data;
+        
+        // Failed?
+        if (resp.error) return document.querySelector('#message').appendChild(addMessage(resp.error));
+
+        // Apply information
+        document.querySelector('#title').innerText = resp.title;
+        document.querySelector('#intro').innerText = resp.intro;
+        document.querySelector('#content').innerText = resp.content;
+        document.querySelector('#userinfo').innerText = new Date(resp.created).toLocaleDateString();
+        document.querySelector('#author').href = `/user/${resp.author}`;
+
+        // Add edit link if you are the author
+        if ("<%= locals.auth._id %>" === resp.author) {
+            document.querySelector('#editlink').href = `/article/${resp.id}/edit`;
+            document.querySelector('#editlink').classList.toggle('hide');
+        }
+
+        getAuthor(resp.author);
+    }
+
+    async function getAuthor(id) {
+        // Load author information
+        let resp = await axios({
+            url: '/api/user/get',
+            method: 'post',
+            data: {
+                id
+            }
+        });
+        resp = await resp.data;
+
+        // Failed?
+        if (resp.error) return document.querySelector('#message').appendChild(addMessage(resp.error));
+
+        // Apply information
+        document.querySelector('#username').innerText = resp.username;
+        document.querySelector('#avatar').src = resp.avatar;
+    }
+
+    function addMessage(msg) {
+        const message = document.createElement('p');
+        message.innerText = msg;
+        setTimeout(()=>{
+            message.remove();
+        }, 1000*10)
+        return message;
+    }
+</script>

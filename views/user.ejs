@@ -1,0 +1,51 @@
+<div id="profile">
+    <div class="banner">
+        <div class="left">
+            <div class="avatar unselectable"><img id="avatar" src="" alt=""></div>
+            <div class="text">
+                <p class="username" id="username"><%= locals.auth.username %></p>
+                <p class="membersince" id="memberSince">Member since: </p>
+            </div>
+        </div>
+        <div class="right unselectable">
+            <a class="hide" id="editlink" href="/profile">Edit Profile</a>
+        </div>
+    </div>
+</div>
+<script>
+    getUser("<%= locals.params.id %>");
+    async function getUser(id) {
+        // Load author information
+        let resp = await axios({
+            url: '/api/user/get',
+            method: 'post',
+            data: {
+                id
+            }
+        });
+        resp = await resp.data;
+
+        // Failed?
+        if (resp.error) return document.querySelector('#message').appendChild(addMessage(resp.error));
+
+        // Apply information
+        document.querySelector('#username').innerText = resp.username;
+        document.querySelector('#avatar').src = resp.avatar;
+        document.querySelector('#memberSince').innerText += " " + new Date(resp.memberSince).toLocaleDateString();
+
+        // Add edit link if you are the author
+        if ("<%= locals.auth._id %>" === resp.id) {
+            document.querySelector('#editlink').href = '/profile';
+            document.querySelector('#editlink').classList.toggle('hide');
+        }
+    }
+
+    function addMessage(msg) {
+        const message = document.createElement('p');
+        message.innerText = msg;
+        setTimeout(()=>{
+            message.remove();
+        }, 1000*10)
+        return message;
+    }
+</script>

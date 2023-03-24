@@ -24,8 +24,20 @@ const pages = {
         "auth": true
     },
     "article/:id/edit": {
-        "title": "Article",
+        "title": "Article edit",
         "view": "article/edit"
+    },
+    "article/:id": {
+        "title": "Article",
+        "view": "article/get"
+    },
+    "logout": {
+        "title": "Logging out",
+        "view": "logout"
+    },
+    "user/:id": {
+        "title": "User",
+        "view": "user"
     }
 }
 

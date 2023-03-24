@@ -1,6 +1,6 @@
 <div id="article">
     <div class="banner">
-        <input type="text" name="title" id="title"></p>
+        <input type="text" name="title" id="title">
     </div>
     <div class="form">
         <label for="intro">Introduction</label>
@@ -58,8 +58,8 @@
             data: {
                 id: "<%= locals.params.id %>",
                 title: document.querySelector('#title').value,
-                intro: document.querySelector('#intro').innerText,
-                content: document.querySelector('#content').innerText
+                intro: document.querySelector('#intro').value,
+                content: document.querySelector('#content').value
             }
         });
     })
