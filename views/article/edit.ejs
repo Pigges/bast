@@ -3,12 +3,15 @@
         <input type="text" name="title" id="title">
     </div>
     <div class="form">
+        <a href="./" id="editlink">View article</a>
         <label for="intro">Introduction</label>
         <textarea name="intro" id="intro"></textarea>
         <label for="content">Content</label>
         <textarea type="textarea" name="content" id="content"></textarea>
         <button id="edit">Update</button>
     </div>
+    <div id="message"></div>
+    <button id="articleDelete">Delete Article</button>
 </div>
 <script>
     <% if (locals.auth) { %>
@@ -37,6 +40,24 @@
         document.querySelector('#title').value = resp.title;
         document.querySelector('#intro').innerText = resp.intro;
         document.querySelector('#content').innerText = resp.content;
+
+        // Enable delete button
+        document.querySelector('#articleDelete').addEventListener('click', async (e)=>{
+        e.preventDefault();
+        let test = await axios({
+            url: '/api/article/delete',
+            method: 'post',
+            data: {
+                id: resp.id
+            }
+        })
+
+        console.log(test);
+
+        console.log("Hola");
+
+        //window.location = '/';
+    })
     }
 
     function addMessage(msg) {
@@ -54,13 +75,7 @@
 
         await axios({
             url: '/api/article/edit',
-            method: 'post',
-            data: {
-                id: "<%= locals.params.id %>",
-                title: document.querySelector('#title').value,
-                intro: document.querySelector('#intro').value,
-                content: document.querySelector('#content').value
-            }
+            method: 'post'
         });
-    })
+    });
 </script>

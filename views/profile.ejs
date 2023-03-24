@@ -44,6 +44,7 @@
         <div id="message"></div>
         <button id="submit">Update</button>
     </form>
+    <button id="deleteAccount">Delete Account</button>
 </div>
 <script>
     // Handle login event
@@ -91,4 +92,14 @@
         }, 1000*10)
         return message;
     }
+
+    document.querySelector('#deleteAccount').addEventListener('click', async (e)=>{
+        e.preventDefault();
+        await axios({
+            url: '/api/profile/delete',
+            method: 'post'
+        })
+
+        window.location = '/';
+    })
 </script>

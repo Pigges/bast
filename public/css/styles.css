@@ -173,11 +173,7 @@ header .right a img {
 }
 
 #featured .cards .card:hover {
-    border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.75);
-    overflow: hidden;
-    padding: 10px;
-    width: 450px;
 }
 
 #featured .cards .card .author {
@@ -565,11 +561,46 @@ header .right a img {
     font-size: 1.2rem;
 }
 
-#article .view #editlink {
+#article #editlink, #article #articleDelete, #profile #deleteAccount {
+    margin: auto;
     text-decoration: none;
     color: var(--secondary);
     width: fit-content;
     padding: 10px 20px;
     border-radius: 10px;
     background-color: var(--primary);
+}
+
+@media screen and (max-width: 1000px) {
+    /* HEADER */
+
+    header {
+        padding: 10px 5px;
+    }
+
+    header #search-bar {
+        width: 150px;
+    }
+
+    /* HOME */
+    
+
+    #featured {
+        flex-direction: column;
+        margin: 0 auto;
+    }
+
+    #featured .cards {
+        flex-direction: column;
+    }
+
+    #featured .cards .card {
+        width: 80%;
+    }
+
+    /* BROWSE */
+
+    #browse .left, #browse .right {
+        display: none;
+    }
 }

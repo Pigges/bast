@@ -7,7 +7,9 @@ import update from './endpoints/profile/update.js';
 import article_create from './endpoints/article/create.js';
 import article_get from './endpoints/article/get.js';
 import article_edit from './endpoints/article/edit.js';
+import article_delete from './endpoints/article/delete.js';
 import user_get from './endpoints/user/get.js';
+import profile_delete from './endpoints/profile/delete.js';
 const router = Router();
 
 
@@ -54,8 +56,18 @@ const endpoints = [
         method: "post"
     },
     {
+        name: "article/delete",
+        fn: article_delete,
+        method: "post"
+    },
+    {
         name: "user/get",
         fn: user_get,
+        method: "post"
+    },
+    {
+        name: "profile/delete",
+        fn: profile_delete,
         method: "post"
     }
 ]
